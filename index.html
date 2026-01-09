@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Syncro Gestión - Digitalizá tu Negocio</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+    html { scroll-behavior: smooth; }
+</style>
 </head>
 <body class="bg-[#0f172a] text-white font-sans">
 
@@ -41,9 +44,9 @@
             <p class="text-gray-400 max-w-lg mb-8">
                 Soluciones de gestión inteligentes y adaptables para bares, restaurantes y comercios. Más control, menos caos.
             </p>
-            <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-full transition-all">
-                Pedir Demo GRATIS
-            </button>
+            <a href="#contacto" class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-full transition-all transform hover:scale-105">
+    Pedir Demo GRATIS
+</a>
         </div>
     </section>
 
@@ -113,69 +116,71 @@
 
 
 <footer class="bg-[#0b1221] py-20 border-t border-gray-800">
-        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16">
+        
+        <div>
+            <h2 class="text-4xl font-bold mb-6 text-white">Nuestros Clientes ya Ganan. <br><span class="text-blue-500">¿Qué esperas vos?</span></h2>
+            <p class="text-gray-400 mb-8 text-lg">
+                Más de 50 negocios en Córdoba ya optimizaron sus procesos con Syncro Gestión. Unite a la revolución digital.
+            </p>
             
-            <div>
-                <h2 class="text-4xl font-bold mb-6 text-white">Nuestros Clientes ya Ganan. <br><span class="text-blue-500">¿Qué esperas vos?</span></h2>
-                <p class="text-gray-400 mb-8 text-lg">
-                    Más de 50 negocios en Córdoba ya optimizaron sus procesos con Syncro Gestión. Unite a la revolución digital.
-                </p>
-                
-                <div class="space-y-4">
-                    <div class="flex items-center gap-4 text-gray-300">
-                        <span class="bg-blue-500/20 p-2 rounded-full text-blue-500">📍</span>
-                        <span>Córdoba, Argentina</span>
-                    </div>
-                    <div class="flex items-center gap-4 text-gray-300">
-                        <span class="bg-blue-500/20 p-2 rounded-full text-blue-500">📞</span>
-                        <span>+54 351 763-4566</span>
-                    </div>
-                    <div class="flex items-center gap-4 text-gray-300">
-                        <span class="bg-blue-500/20 p-2 rounded-full text-blue-500">✉️</span>
-                        <span>contacto@CyberNest.com</span>
-                    </div>
+            <div class="space-y-4">
+                <div class="flex items-center gap-4 text-gray-300">
+                    <span class="bg-blue-500/20 p-2 rounded-full text-blue-500">📍</span>
+                    <span>Córdoba, Argentina</span>
+                </div>
+                <div class="flex items-center gap-4 text-gray-300">
+                    <span class="bg-blue-500/20 p-2 rounded-full text-blue-500">📞</span>
+                    <span>+54 351 763-4566</span>
+                </div>
+                <div class="flex items-center gap-4 text-gray-300">
+                    <span class="bg-blue-500/20 p-2 rounded-full text-blue-500">✉️</span>
+                    <span>contacto@CyberNest.com</span>
                 </div>
             </div>
+        </div>
 
-            <div class="bg-[#1e293b] p-8 rounded-3xl shadow-2xl border border-gray-700">
-                <h3 class="text-2xl font-semibold mb-6">Solicitá tu asesoría gratuita</h3>
-                <form action="#" class="space-y-4">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-400 mb-1">Nombre Completo</label>
-                        <input type="text" class="w-full bg-[#0f172a] border border-gray-700 rounded-xl px-4 py-3 focus:outline-none focus:border-blue-500 transition-all" placeholder="Fungus">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-400 mb-1">WhatsApp</label>
-                        <input type="tel" class="w-full bg-[#0f172a] border border-gray-700 rounded-xl px-4 py-3 focus:outline-none focus:border-blue-500 transition-all" placeholder="+54 9 351...">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-400 mb-1">Tipo de Negocio</label>
-                        <select class="w-full bg-[#0f172a] border border-gray-700 rounded-xl px-4 py-3 focus:outline-none focus:border-blue-500 transition-all">
-                            <option>Restaurante / Bar</option>
-                            <option>Tienda de Ropa</option>
-                            <option>Minimarket</option>
-                            <option>Otro</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 rounded-xl shadow-lg shadow-blue-500/20 transition-all mt-4">
-                        ¡QUIERO MI DEMO AHORA!
-                    </button>
-                </form>
-            </div>
+        <div id="contacto" class="bg-[#1e293b] p-8 rounded-3xl shadow-2xl border border-gray-700">
+            <h3 class="text-2xl font-semibold mb-6">Solicitá tu asesoría gratuita</h3>
+            <form action="#" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-400 mb-1">Nombre Completo</label>
+                    <input type="text" class="w-full bg-[#0f172a] border border-gray-700 rounded-xl px-4 py-3 focus:outline-none focus:border-blue-500 transition-all" placeholder="Tu nombre">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-400 mb-1">WhatsApp</label>
+                    <input type="tel" class="w-full bg-[#0f172a] border border-gray-700 rounded-xl px-4 py-3 focus:outline-none focus:border-blue-500 transition-all" placeholder="+54 9 351...">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-400 mb-1">Tipo de Negocio</label>
+                    <select class="w-full bg-[#0f172a] border border-gray-700 rounded-xl px-4 py-3 focus:outline-none focus:border-blue-500 transition-all">
+                        <option>Restaurante / Bar</option>
+                        <option>Tienda de Ropa</option>
+                        <option>Minimarket</option>
+                        <option>Otro</option>
+                    </select>
+                </div>
+                <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 rounded-xl shadow-lg shadow-blue-500/20 transition-all mt-4">
+                    ¡QUIERO MI DEMO AHORA!
+                </button>
+            </form>
         </div>
-        
-        <div class="mt-20 text-center text-gray-500 text-sm border-t border-gray-800 pt-8">
-            © 2026 CyberNest. Todos los derechos reservados.
-        </div>
-    </footer>
-    <a href="https://wa.me/549351XXXXXXX?text=Hola!%20Vi%20la%20web%20de%20Syncro%20Gestión%20y%20quiero%20más%20información" 
+    </div>
+    
+    <div class="mt-20 text-center text-gray-500 text-sm border-t border-gray-800 pt-8">
+        © 2026 CyberNest. Todos los derechos reservados.
+    </div>
+</footer>
+ <a href="https://wa.me/5493517634566?text=Hola!%20Vi%20la%20web%20de%20CyberNest%20y%20quiero%20más%20información" 
        target="_blank" 
        class="fixed bottom-8 right-8 z-50 group">
         <span class="absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75 animate-ping"></span>
-        
         <div class="relative bg-[#25D366] p-4 rounded-full shadow-2xl transition-transform hover:scale-110 active:scale-95 flex items-center justify-center">
             <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.246 2.248 3.484 5.232 3.484 8.412-.003 6.557-5.338 11.892-11.893 11.892-1.997-.001-3.951-.5-5.688-1.448l-6.309 1.656zm6.224-3.669c1.412.838 2.81 1.268 4.256 1.269 5.233 0 9.491-4.258 9.493-9.492.001-2.537-.987-4.922-2.783-6.72s-4.183-2.784-6.72-2.784c-5.233 0-9.491 4.258-9.493 9.492-.001 1.629.413 3.213 1.2 4.603l-1.007 3.676 3.774-.99l-.47.272zm9.806-6.705c-.272-.137-1.611-.795-1.861-.885-.25-.09-.432-.136-.613.137-.182.273-.705.886-.864 1.068-.159.182-.318.204-.59.068-.272-.137-1.15-.424-2.19-1.353-.809-.722-1.355-1.614-1.514-1.886-.159-.272-.017-.419.119-.556.124-.124.272-.318.409-.477.136-.159.182-.272.272-.454.091-.182.046-.341-.023-.477-.068-.136-.613-1.477-.841-2.022-.222-.534-.446-.462-.613-.47l-.523-.008c-.182 0-.477.068-.727.341-.25.272-.954.932-.954 2.272s.977 2.636 1.114 2.818c.136.182 1.923 2.937 4.659 4.114.651.279 1.158.446 1.554.572.653.208 1.248.179 1.718.109.524-.078 1.611-.659 1.838-1.295.227-.636.227-1.182.159-1.295-.068-.113-.25-.182-.522-.318z"/>
             </svg>
+        </div>
+    </a>
+    <script src="script.js"></script>
 </body>
 </html>
