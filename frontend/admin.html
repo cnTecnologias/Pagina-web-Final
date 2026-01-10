@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Cyber Nest - Panel de Leads</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#0f172a] text-white p-8">
+    <h1 class="text-3xl font-bold mb-8">Leads de Cyber Nest</h1>
+    
+    <div class="overflow-x-auto">
+        <table class="w-full bg-[#1e293b] rounded-xl overflow-hidden">
+            <thead class="bg-blue-600 text-left">
+                <tr>
+                    <th class="p-4">Fecha</th>
+                    <th class="p-4">Nombre</th>
+                    <th class="p-4">WhatsApp</th>
+                    <th class="p-4">Negocio</th>
+                    <th class="p-4">Acción</th>
+                </tr>
+            </thead>
+            <tbody id="lista-clientes">
+                </tbody>
+        </table>
+    </div>
+
+    <script>
+        fetch('http://localhost:3000/api/clientes-secretos')
+            .then(res => res.json())
+            .then(data => {
+                const lista = document.getElementById('lista-clientes');
+                data.forEach(c => {
+                    const fecha = new Date(c.fecha).toLocaleString();
+                    lista.innerHTML += `
+                        <tr class="border-t border-gray-700">
+                            <td class="p-4 text-sm text-gray-400">${fecha}</td>
+                            <td class="p-4 font-bold">${c.nombre}</td>
+                            <td class="p-4">${c.whatsapp}</td>
+                            <td class="p-4 text-blue-400">${c.tipo_negocio}</td>
+                            <td class="p-4">
+                                <a href="https://wa.me/${c.whatsapp.replace(/[^0-9]/g, '')}" 
+                                   target="_blank" 
+                                   class="bg-green-600 px-3 py-1 rounded text-xs hover:bg-green-500">
+                                   Contactar
+                                </a>
+                            </td>
+                        </tr>
+                    `;
+                });
+            });
+    </script>
+</body>
+</html>
