@@ -33,6 +33,22 @@ app.post('/api/contacto', (req, res) => {
     });
 });
 
+// Endpoint para VER los contactos (Tu panel de control)
+app.get('/api/clientes-secretos', (req, res) => {
+    const sql = `SELECT * FROM contactos ORDER BY fecha DESC`;
+    
+    db.all(sql, [], (err, rows) => {
+        if (err) {
+            return res.status(500).json({ error: err.message });
+        }
+        res.json(rows);
+    });
+});
+
+
+
+
+
 app.listen(PORT, () => {
     console.log(`🚀 Servidor de Cyber Nest corriendo en http://localhost:${PORT}`);
 });
