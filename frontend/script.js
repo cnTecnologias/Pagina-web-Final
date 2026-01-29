@@ -1,59 +1,56 @@
 // 1. Manejo del Formulario con Conexión Real al Backend
     const contactForm = document.querySelector('form');
-    if (contactForm) {
-        contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
+if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
 
-            // Capturamos los datos
-            const nombre = contactForm.querySelector('input[type="text"]').value.trim();
-            const whatsapp = contactForm.querySelector('input[type="tel"]').value.trim();
-            const tipo_negocio = contactForm.querySelector('select').value;
+        const nombre = contactForm.querySelector('input[type="text"]').value.trim();
+        const whatsapp = contactForm.querySelector('input[type="tel"]').value.trim();
+        const tipo_negocio = contactForm.querySelector('select').value;
 
-            // Validación de seguridad (No mandamos basura al server)
-            if (nombre === "" || whatsapp === "") {
-                alert("⚠️ Por favor, rellena tu nombre y WhatsApp.");
-                return;
-            }
+        if (nombre === "" || whatsapp === "") {
+            alert("⚠️ Por favor, rellena tu nombre y WhatsApp.");
+            return;
+        }
 
-            const btn = contactForm.querySelector('button');
-            const originalText = btn.innerText;
-            btn.innerText = "ENVIANDO SOLICITUD...";
-            btn.disabled = true;
+        const btn = contactForm.querySelector('button');
+        const originalText = btn.innerText;
+        btn.innerText = "ENVIANDO SOLICITUD...";
+        btn.disabled = true;
 
-            // --- AQUÍ EMPIEZA LA CONEXIÓN REAL ---
-            fetch('http://localhost:3000/api/contacto', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    nombre: nombre,
-                    whatsapp: whatsapp,
-                    tipo_negocio: tipo_negocio
-                })
-            })
-            .then(response => {
-                if (!response.ok) throw new Error("Error en el servidor");
-                return response.json();
-            })
-            .then(data => {
-                // Si el servidor responde OK, recién ahí mostramos el éxito
-                alert(`¡Gracias ${nombre}! Tu solicitud fue guardada en nuestra base de datos.`);
-                contactForm.reset();
-            })
-            .catch(error => {
-                // Si el servidor está APAGADO o hubo un error, salta esto
-                console.error("Error al conectar:", error);
-                alert("❌ Error: No se pudo conectar con el servidor. ¿Está encendido?");
-            })
-            .finally(() => {
-                // Esto se ejecuta SIEMPRE, para devolver el botón a su estado original
-                btn.innerText = originalText;
-                btn.disabled = false;
-            });
+        fetch('http://localhost:3000/api/contacto', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ nombre, whatsapp, tipo_negocio })
+        })
+        .then(response => {
+            if (!response.ok) throw new Error("Error en el servidor");
+            return response.json();
+        })
+        .then(data => {
+            // USAMOS EL PADRE DEL FORMULARIO PARA QUE LA ANIMACIÓN NO LO BORRE
+            const container = contactForm.parentElement;
+            container.innerHTML = `
+                <div class="text-center py-10" style="opacity: 1 !important; transform: none !important;">
+                    <div class="bg-green-500/20 text-green-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2 text-white">¡Solicitud Enviada!</h3>
+                    <p class="text-gray-400">Gracias <strong>${nombre}</strong>. En breve te escribiremos por <strong>WhatsApp</strong> para activar tu demo.</p>
+                    <button onclick="location.reload()" class="mt-6 text-sm text-blue-400 hover:underline">Volver a enviar</button>
+                </div>
+            `;
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            alert("❌ Error de conexión. Verificá que el servidor esté corriendo.");
+            btn.innerText = originalText;
+            btn.disabled = false;
         });
-    }
-
+    });
+}
     // 2. Animación Infinita (Sube y Baja)
     const observerOptions = { 
         threshold: 0.1,
