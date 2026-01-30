@@ -1,80 +1,74 @@
-// 1. Manejo del Formulario con Conexión Real al Backend
-    const contactForm = document.querySelector('form');
-if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-        e.preventDefault();
+const contactForm = document.getElementById("contactForm");
+const statusMessage = document.getElementById("statusMessage");
+const successNameSpan = document.getElementById("successName");
+const formWrapper = document.getElementById("form-wrapper");
+const successMessageDiv = document.getElementById("success-message");
 
-        const nombre = contactForm.querySelector('input[type="text"]').value.trim();
-        const whatsapp = contactForm.querySelector('input[type="tel"]').value.trim();
-        const tipo_negocio = contactForm.querySelector('select').value;
+contactForm.addEventListener("submit", async (e) => {
+  e.preventDefault(); // Evita que la página se recargue
 
-        if (nombre === "" || whatsapp === "") {
-            alert("⚠️ Por favor, rellena tu nombre y WhatsApp.");
-            return;
-        }
+  // Bloqueamos el botón para evitar doble clic
+  const btn = document.getElementById("btnEnviar");
+  btn.disabled = true;
+  // Verificación de seguridad para que el script no muera si el div no está
+  if (!statusMessage) {
+    console.error("No se encontró el elemento 'statusMessage' en el HTML");
+    return;
+  }
 
-        const btn = contactForm.querySelector('button');
-        const originalText = btn.innerText;
-        btn.innerText = "ENVIANDO SOLICITUD...";
-        btn.disabled = true;
+  statusMessage.innerText = "Procesando tu solicitud...";
+  statusMessage.classList.remove("text-red-500", "text-green-500");
 
-        fetch('http://localhost:3000/api/contacto', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ nombre, whatsapp, tipo_negocio })
-        })
-        .then(response => {
-            if (!response.ok) throw new Error("Error en el servidor");
-            return response.json();
-        })
-        .then(data => {
-            // USAMOS EL PADRE DEL FORMULARIO PARA QUE LA ANIMACIÓN NO LO BORRE
-            const container = contactForm.parentElement;
-            container.innerHTML = `
-                <div class="text-center py-10" style="opacity: 1 !important; transform: none !important;">
-                    <div class="bg-green-500/20 text-green-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
-                        </svg>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-2 text-white">¡Solicitud Enviada!</h3>
-                    <p class="text-gray-400">Gracias <strong>${nombre}</strong>. En breve te escribiremos por <strong>WhatsApp</strong> para activar tu demo.</p>
-                    <button onclick="location.reload()" class="mt-6 text-sm text-blue-400 hover:underline">Volver a enviar</button>
-                </div>
-            `;
-        })
-        .catch(error => {
-            console.error("Error:", error);
-            alert("❌ Error de conexión. Verificá que el servidor esté corriendo.");
-            btn.innerText = originalText;
-            btn.disabled = false;
-        });
-    });
-}
-    // 2. Animación Infinita (Sube y Baja)
-    const observerOptions = { 
-        threshold: 0.1,
-        rootMargin: "0px 0px -50px 0px" 
-    };
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = "1";
-                entry.target.style.transform = "translateY(0)";
-            } else {
-                entry.target.style.opacity = "0";
-                entry.target.style.transform = "translateY(30px)";
-            }
-        });
-    }, observerOptions);
+  const data = {
+    nombre: document.getElementById("nombre").value,
+    email: document.getElementById("email").value,
+    telefono: document.getElementById("telefono").value,
+    negocio: document.getElementById("tipoNegocio").value, // Chequeá que el select tenga este ID
+  };
 
-    // Seleccionamos todos los bloques visuales (Nav, Secciones, Footer y Tarjetas)
-    const elementsToAnimate = document.querySelectorAll('nav, section, footer, .bg-\\[\\#1e293b\\]');
-    
-    elementsToAnimate.forEach(el => {
-        el.style.opacity = "0";
-        el.style.transform = "translateY(30px)";
-        el.style.transition = "all 0.6s cubic-bezier(0.4, 0, 0.2, 1)";
-        observer.observe(el);
-    });
+  try {
+    const response = await fetch(
+      "https://evonectech-api.fedepedano2003.workers.dev/",
+      {
+        // <-- TU URL AQUÍ
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      },
+    );
+
+    if (response.ok) {
+      // 1. Personalizamos el mensaje con el nombre del usuario (Toque PRO)
+      successNameSpan.innerText = document.getElementById("nombre").value;
+      // PASO 1: Desvanecer el formulario (Fade Out)
+      formWrapper.classList.remove("opacity-100", "translate-y-0");
+      formWrapper.classList.add("opacity-0", "-translate-y-4"); // Se va hacia arriba y desaparece
+
+      // Esperamos 500ms (lo que dura la animación) antes de quitarlo del HTML
+      setTimeout(() => {
+        formWrapper.classList.add("hidden"); // Lo sacamos del flujo
+
+        // PASO 2: Preparar el mensaje de éxito (sigue invisible pero ya ocupa espacio)
+        successMessageDiv.classList.remove("hidden");
+
+        // Pequeño truco: Esperamos 50ms para que el navegador procese el "display: block"
+        // antes de activar la animación de entrada.
+        setTimeout(() => {
+          successMessageDiv.classList.remove("opacity-0", "translate-y-4");
+          successMessageDiv.classList.add("opacity-100", "translate-y-0"); // Aparece suavemente
+          successMessageDiv.scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+          });
+        }, 50);
+      }, 500); // Este tiempo debe coincidir con el duration-500 del HTML
+    } else {
+      statusMessage.innerText = "Error al enviar. Intenta de nuevo.";
+    }
+  } catch (error) {
+    console.error("EL CULPABLE ES ESTE:", error);
+    statusMessage.innerText = "Error de conexión con el servidor.";
+  } finally {
+    btn.disabled = false;
+  }
+});

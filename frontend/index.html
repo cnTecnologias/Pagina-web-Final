@@ -321,20 +321,33 @@
         </div>
 
         <div
-          class="bg-[#1e293b] p-8 rounded-3xl shadow-2xl border border-gray-700"
+          id="form-wrapper"
+          class="bg-[#1e293b] p-8 rounded-3xl shadow-2xl border border-gray-700 transition-all duration-500 ease-in-out opacity-100 transform translate-y-0"
         >
           <h3 class="text-2xl font-semibold mb-6">
             Solicitá tu asesoría gratuita
           </h3>
-          <form action="#" class="space-y-4">
+          <form id="contactForm" class="space-y-4">
             <div>
               <label class="block text-sm font-medium text-gray-400 mb-1"
                 >Nombre Completo</label
               >
               <input
                 type="text"
+                id="nombre"
                 class="w-full bg-[#0f172a] border border-gray-700 rounded-xl px-4 py-3 focus:outline-none focus:border-blue-500 transition-all"
                 placeholder="Tu nombre"
+              />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-400 mb-1"
+                >Email</label
+              >
+              <input
+                type="email"
+                id="email"
+                class="w-full bg-[#0f172a] border border-gray-700 rounded-xl px-4 py-3 focus:outline-none focus:border-blue-500 transition-all"
+                placeholder="Tu email"
               />
             </div>
             <div>
@@ -342,6 +355,7 @@
                 >WhatsApp</label
               >
               <input
+                id="telefono"
                 type="tel"
                 class="w-full bg-[#0f172a] border border-gray-700 rounded-xl px-4 py-3 focus:outline-none focus:border-blue-500 transition-all"
                 placeholder="+54 9 351..."
@@ -352,6 +366,7 @@
                 >Tipo de Negocio</label
               >
               <select
+                id="tipoNegocio"
                 class="w-full bg-[#0f172a] border border-gray-700 rounded-xl px-4 py-3 focus:outline-none focus:border-blue-500 transition-all"
               >
                 <option>Restaurante / Bar</option>
@@ -361,17 +376,38 @@
               </select>
             </div>
             <button
+              id="btnEnviar"
               type="submit"
               class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 rounded-xl shadow-lg shadow-blue-500/20 transition-all mt-4"
             >
               ¡QUIERO MI DEMO AHORA!
             </button>
+            <div
+              id="statusMessage"
+              class="text-center mt-4 text-sm font-medium"
+            ></div>
             <p class="text-xs text-center text-gray-500 mt-3">
               * Al solicitar la demo, un asesor se contactará con vos por
               <span class="text-green-500 font-bold">WhatsApp</span> en menos de
               10 minutos para coordinar.
             </p>
           </form>
+        </div>
+        <div
+          id="success-message"
+          class="hidden text-center p-8 bg-[#0f172a] border border-green-500/30 rounded-xl flex flex-col items-center justify-evenly transition-all duration-500 ease-in-out opacity-0 transform translate-y-4"
+        >
+          <div>
+            <div class="text-5xl mb-4">✅</div>
+            <h3 class="text-2xl font-bold text-white mb-2">
+              ¡Solicitud Enviada!
+            </h3>
+          </div>
+          <p class="text-gray-400">
+            Gracias
+            <span id="successName" class="text-green-400 font-bold"></span>. Te
+            escribiremos al WhatsApp en los próximos 10 minutos.
+          </p>
         </div>
       </div>
 
@@ -382,7 +418,7 @@
       </div>
     </footer>
     <a
-      href="https://wa.me/5493513048405?text=Hola!%20Vi%20la%20web%20de%20CyberNest%20y%20quiero%20más%20información"
+      href="https://wa.me/5493513048405?text=Hola!%20Vi%20la%20web%20de%20Evonec%20y%20quiero%20más%20información"
       target="_blank"
       class="fixed bottom-8 right-8 z-50 group"
     >
