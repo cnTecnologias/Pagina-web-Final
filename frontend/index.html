@@ -28,6 +28,7 @@
     />
     <meta property="og:url" content="https://evonectech.com/" />
     <link rel="icon" type="image/png" href="img/iconoWebMejoradoEvonec.png" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
       html {
@@ -103,7 +104,9 @@
       <div class="container mx-auto px-4">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
           <div
-            class="p-6 rounded-xl border border-blue-500/20 bg-[#1e293b]/50 backdrop-blur-sm"
+            class="p-6 rounded-xl border border-blue-500/20 bg-[#1e293b]/50 backdrop-blur-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-lg hover:shadow-blue-500/20"
+            data-aos="fade-up"
+            data-aos-delay="100"
           >
             <div class="text-blue-500 mb-4 flex justify-center">
               <svg
@@ -129,7 +132,9 @@
           </div>
 
           <div
-            class="p-6 rounded-xl border border-green-500/20 bg-[#1e293b]/50 backdrop-blur-sm"
+            class="p-6 rounded-xl border border-green-500/20 bg-[#1e293b]/50 backdrop-blur-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-lg hover:shadow-blue-500/20"
+            data-aos="fade-up"
+            data-aos-delay="200"
           >
             <div class="text-green-500 mb-4 flex justify-center">
               <svg
@@ -155,7 +160,9 @@
           </div>
 
           <div
-            class="p-6 rounded-xl border border-purple-500/20 bg-[#1e293b]/50 backdrop-blur-sm"
+            class="p-6 rounded-xl border border-purple-500/20 bg-[#1e293b]/50 backdrop-blur-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-lg hover:shadow-blue-500/20"
+            data-aos="fade-up"
+            data-aos-delay="300"
           >
             <div class="text-purple-500 mb-4 flex justify-center">
               <svg
@@ -196,6 +203,8 @@
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <div
           class="bg-[#1e293b] p-8 rounded-2xl border border-gray-700 hover:border-blue-500 transition-all group"
+          data-aos="fade-up"
+          data-aos-delay="100"
         >
           <div
             class="text-blue-500 mb-4 group-hover:scale-110 transition-transform"
@@ -223,6 +232,8 @@
 
         <div
           class="bg-[#1e293b] p-8 rounded-2xl border border-gray-700 hover:border-blue-500 transition-all group"
+          data-aos="fade-up"
+          data-aos-delay="200"
         >
           <div
             class="text-blue-500 mb-4 group-hover:scale-110 transition-transform"
@@ -250,6 +261,8 @@
 
         <div
           class="bg-[#1e293b] p-8 rounded-2xl border border-gray-700 hover:border-blue-500 transition-all group"
+          data-aos="fade-up"
+          data-aos-delay="300"
         >
           <div
             class="text-blue-500 mb-4 group-hover:scale-110 transition-transform"
@@ -277,6 +290,8 @@
 
         <div
           class="bg-[#1e293b] p-8 rounded-2xl border border-gray-700 hover:border-blue-500 transition-all group"
+          data-aos="fade-up"
+          data-aos-delay="400"
         >
           <div
             class="text-blue-500 mb-4 group-hover:scale-110 transition-transform"
@@ -457,5 +472,12 @@
       </div>
     </a>
     <script src="script.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        duration: 800, // Duración de la animación en milisegundos
+        once: true, // Para que solo se anime una vez al bajar
+      });
+    </script>
   </body>
 </html>
